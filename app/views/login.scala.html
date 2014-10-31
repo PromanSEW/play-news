@@ -1,6 +1,7 @@
-@(loginForm: Form[Login], error: String)
+@(loginForm: Form[Login], error: String, path: String)
 @main("Вход") {
-	@helper.form(routes.Auth.authenticate()) {
+	@helper.form(if(path == "") { routes.Auth.auth() } else { routes.Auth.authPage(path) }) {
+	@input(loginForm("sgroup"), "", "", 'type -> "hidden")
 	<table width="100%">
 		<tr>
 			<td width="40%"></td>

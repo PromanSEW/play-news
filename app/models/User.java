@@ -1,6 +1,8 @@
 package models;
 
 import java.security.*;
+import java.util.List;
+
 import javax.persistence.*;
 
 import play.data.validation.Constraints.Email;
@@ -20,8 +22,10 @@ public class User extends Model {
 	private UserGroup group;
 	
 	public User(Login l) {
-		email = l.email; passwordHash = SHA256(l.password); nick = l.nick; group = UserGroup.USER();
+		email = l.email; passwordHash = SHA256(l.password); nick = l.nick; group = UserGroup.getUserGroup(l.sgroup);
 	}
+	
+	private User() { email = ""; passwordHash = ""; nick = ""; group = UserGroup.getUserGroup("user"); }
 
 	private static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 
@@ -32,9 +36,22 @@ public class User extends Model {
 		} return null;
 	}
 	
-	public static void create(User user) {
-		user.save();
+	public static User getUser(String email) {
+		if(email == null) return new User();
+		else return find.byId(email);
 	}
+	
+	public static Login getLogin(String email) { return new Login(find.byId(email)); }
+	
+	public UserGroup getUserGroup() { return group; }
+	
+	public void setUserGroup(UserGroup group) { this.group = group; }
+	
+	public String getEmail() { return email; }
+	
+	public static List<User> all() { return find.all(); }
+	
+	public static void deleteUser(String email) { find.ref(email).delete(); }
 
 	private static String SHA256(String str) {
 		try { MessageDigest digest = MessageDigest.getInstance("SHA-256");

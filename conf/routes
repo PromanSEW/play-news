@@ -3,12 +3,19 @@
 # ~~~~
 
 # Home page
-GET		/				controllers.Application.index()
-GET		/login  		controllers.Auth.login()
-GET		/register		controllers.Auth.signup()
-POST	/login			controllers.Auth.authenticate()
-POST	/logout			controllers.Auth.logout()
-POST	/register		controllers.Auth.register()
+GET		/									controllers.Application.index()
+GET		/login  							controllers.Auth.login()
+GET		/register							controllers.Auth.signup()
+GET		/admin								controllers.Admin.admin()
+GET		/admin/users						controllers.Admin.users()
+GET		/admin/install						controllers.Admin.install()
+GET		/*path								controllers.Application.error(path: String)
+POST	/login								controllers.Auth.auth()
+POST	/login/:path						controllers.Auth.authPage(path: String)
+POST	/logout								controllers.Auth.logout()
+POST	/register							controllers.Auth.register()
+POST	/admin/users/$group<(admin|user)>	controllers.Admin.addUser(group: String)
+POST	/admin/users/:email/delete			controllers.Admin.deleteUser(email: String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET		/assets/*file	controllers.Assets.at(path="/public", file)
+GET		/assets/*file						controllers.Assets.at(path="/public", file)

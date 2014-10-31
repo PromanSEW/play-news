@@ -16,11 +16,22 @@ public class UserGroup extends Model {
 		name = n; title = t;
 	}
 	
-	public static UserGroup ADMIN() {
+	private static Finder<String, UserGroup> find = new Finder<String, UserGroup>(String.class, UserGroup.class);
+	
+	private static UserGroup ADMIN() {
 		return new UserGroup("admin", "Администратор");
 	}
 	
-	public static UserGroup USER() {
+	private static UserGroup USER() {
 		return new UserGroup("user", "Пользователь");
+	}
+	
+	public static UserGroup getUserGroup(String group) {
+		if(find.all().isEmpty()) addUserGroups();
+		return find.byId(group);
+	}
+	
+	private static void addUserGroups() {
+		//ADMIN().save(); USER().save();
 	}
 }

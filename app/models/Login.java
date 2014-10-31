@@ -8,9 +8,6 @@ import play.db.ebean.Model;
 public class Login extends Model {
 	
 	private static final long serialVersionUID = 1L;
-
-	@Required
-	public String nick;
 	
 	@Id
 	@Email
@@ -19,6 +16,16 @@ public class Login extends Model {
 	
 	@Required
 	public String password;
+	
+	@Required
+	public String nick;
+	public String sgroup;
+	
+	public Login() { email = ""; password = ""; nick = ""; sgroup = "user"; }
+	
+	public Login(User user) {
+		email = user.getEmail(); password = ""; nick = user.nick; sgroup = user.getUserGroup().name;
+	}
 	
 	public User validate() {
 		return User.authenticate(email, password);
