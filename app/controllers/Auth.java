@@ -33,17 +33,21 @@ public class Auth extends Controller {
     
     // Страница регистрации
     public static Result signup() {
-    	return ok(register.render(Form.form(Login.class).fill(new Login())));
+    	if(session("email") != null) return redirect(routes.Application.index());
+    	else return ok(register.render(Form.form(Login.class).fill(new Login()), ""));
     }
     
     // Регистрация
     public static Result register() {
     	Form<Login> regForm = Form.form(Login.class).bindFromRequest();
-    	if(regForm.hasErrors()) return badRequest(register.render(regForm));
+    	if(regForm.hasErrors()) return badRequest(register.render(regForm, ""));
     	else {
-    		(new User(regForm.get())).save();
-    		session("email", regForm.get().email);
-    		return redirect(routes.Application.index());
+    		String exists = User.exists(regForm.get());
+    		if(exists == null) {
+    			(new User(regForm.get())).save();
+    			session("email", regForm.get().email);
+    			return redirect(routes.Application.index());
+    		} else return badRequest(register.render(regForm, exists));
     	}
     }
 }

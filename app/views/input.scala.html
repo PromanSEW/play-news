@@ -1,10 +1,13 @@
 @(field: Field, label: String, error: String, args: (Symbol,Any)*)
-<div class="form-group@if(field.hasErrors || error == "failed") { has-error}">
+<div class="form-group@if(field.hasErrors || error != "") { has-error}">
 	<label for="@field.name" class="control-label">@label</label>
 	<input name="@field.name" id="@field.name" class="form-control" value="@field.value" @toHtmlArgs(args.toMap) />
-	@if(field.hasErrors || error == "failed") {
+	@if(field.hasErrors || error != "") {
 	<span class="help-block">
-		@if(error == "") {Поле должно быть заполнено!} else {Неверный логин или пароль!}
+		@if(error == "") {Поле должно быть заполнено!}
+		@if(error == "failed") {Неверный логин или пароль!}
+		@if(error == "email") {Этот Email уже зарегистрирован!}
+		@if(error == "nick") {Этот ник уже зарегистрирован!}
 	</span>
 	}
 </div>

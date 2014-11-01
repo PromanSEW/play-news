@@ -31,6 +31,14 @@ public class User extends Model {
 		} return null;
 	}
 	
+	public static String exists(Login l) {
+		if(find.byId(l.email) != null) return "email";
+		else {
+			if(find.where().like("nick", "%" + l.nick + "%").findList().isEmpty()) return null;
+			else return "nick"; 
+		}
+	}
+	
 	public static String getNick(String email) {
 		if(email == null) return "";
 		else {

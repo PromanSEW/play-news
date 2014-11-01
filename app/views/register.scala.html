@@ -1,15 +1,15 @@
-@(regForm: Form[Login])
+@(regForm: Form[Login], error: String)
 @main("Регистрация", "") {
 	@helper.form(routes.Auth.register()) {
 	<table width="100%">
 		<tr>
 			<td width="40%"></td>
-			<td>@input(regForm("nick"), "Ник", "", 'type -> "text")</td>
+			<td>@input(regForm("nick"), "Ник", if(error == "nick") {"nick"} else {""}, 'type -> "text")</td>
 			<td width="40%"></td>
 		</tr>
 		<tr>
 			<td width="40%"></td>
-			<td>@input(regForm("email"), "Email", "", 'type -> "email")</td>
+			<td>@input(regForm("email"), "Email", if(error == "email") {"email"} else {""}, 'type -> "email")</td>
 			<td width="40%"></td>
 		</tr>
 		<tr>

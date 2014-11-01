@@ -13,7 +13,7 @@
 	</tr>
 	<tr>
 		<td>
-			<table>
+			<table width="100%">
 				<tr>
 					<td>
 					@helper.form(routes.Admin.edit(newsForm("id").value)) {
@@ -21,7 +21,6 @@
 						<input type="hidden" name="id" value="@newsForm("id").value" />
 						<input type="hidden" name="author" value="@newsForm("author").value" />
 						@input(newsForm("topic"), "Заголовок", "", 'type -> "text", 'placeholder -> "Название новости")
-						<br />
 						@textarea(newsForm("content"), "Текст новости", 'rows -> 6)
 						<input type="submit" class="btn btn-primary" value="Редактировать" />
 					}   
