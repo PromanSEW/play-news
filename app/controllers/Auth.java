@@ -17,10 +17,12 @@ public class Auth extends Controller {
     public static Result auth() {
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
     	if(loginForm.hasErrors()) return badRequest(login.render(loginForm, ""));
-    	else if(loginForm.get().validateUser() != null) {
-    		session("email", loginForm.get().email);
-    		return redirect(routes.Application.index());
-    	} else return badRequest(login.render(loginForm, "failed"));
+    	else {
+    		if(loginForm.get().validateUser() != null) {
+    			session("email", loginForm.get().email);
+    			return redirect(routes.Application.index());
+    		} else return badRequest(login.render(loginForm, "failed"));
+    	}
     }
     
     // Выход и очистка сессии

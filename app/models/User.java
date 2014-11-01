@@ -15,7 +15,9 @@ public class User extends Model {
 	@Id
 	@Email
 	private String email;
+	
 	private String passwordHash;
+	
 	private String nick;
 	
 	public User(Login l) { email = l.email; passwordHash = SHA256(l.password); nick = l.nick; }

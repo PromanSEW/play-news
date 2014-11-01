@@ -10,7 +10,7 @@
 		</tr>
 		<tr>
 			<td width="40%"></td>
-			<td>@input(loginForm("password"), "Пароль", error, 'type -> "password")</td>
+			<td>@input(loginForm("password"), "Пароль", if(error == "failed") {""} else {error}, 'type -> "password")</td>
 			<td width="40%"></td>
 		</tr>
 		<tr>

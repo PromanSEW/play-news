@@ -12,5 +12,5 @@
 		</td>
 		}
 	</tr>
-	<tr><td colspan="3">@newsobj.content</td></tr>
+	<tr><td colspan="@if(editable) {4} else {3}">@Html(newsobj.content)</td></tr>
 </table>

@@ -20,15 +20,21 @@
     	<table class="table">
 			<tr>
 				<td>
-					<a href="/">Мой сайт</a>
+					<h3><a href="/">Мой сайт</a></h3>
 				</td>
-				<td>
-					<h4 id="hello">Добро пожаловать, @if(user == "") {гость} else {@user}!</h4>
+				<td width="70%">
 					@helper.form(if(user == "") {routes.Auth.login()} else {routes.Auth.logout()}, 'class -> "form-inline") {
-		 			<input type="submit" class="btn" value="@if(user == "") {Войти} else {Выйти}" />
+					<table width="100%">
+						<tr>
+							<td><label>Добро пожаловать, @if(user == "") {гость} else {@user}!</label></td>
+		 					<td style="text-align: right">
+		 						<input type="submit" class="btn" value="@if(user == "") {Войти} else {Выйти}" />
+		 					</td>
+		 				</tr>
+		 			</table>
 					}
 				</td>
-				<td style="text-align: right">
+				<td>
 					<form class="form-inline" action="http://www.google.ru/search" method="GET">
 						<input type="search" name="q" class="form-control" placeholder="Поиск">
                 		<button type="submit" class="btn">Поиск</button>

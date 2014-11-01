@@ -17,11 +17,14 @@ public class News extends Model {
 	
 	public Date date;
 	
+	@Required
 	public String author;
 	
+	@Required
 	public String topic;
 	
 	@Required
+	@Column(columnDefinition = "TEXT")
 	public String content;
 	
 	private static Finder<Long, News> find = new Finder<Long, News>(Long.class, News.class);
