@@ -26,8 +26,7 @@ public class Auth extends Controller {
     // Выход и очистка сессии
     public static Result logout() {
     	session().clear();
-    	flash("success", "Вы успешно разлогинились");
-    	return redirect(routes.Auth.login()); 
+    	return redirect(routes.Application.index()); 
     }
     
     // Страница регистрации

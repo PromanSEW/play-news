@@ -1,5 +1,5 @@
 @(loginForm: Form[Login], error: String)
-@main("Вход") {
+@main("Вход", "") {
 	@helper.form(routes.Auth.auth()) {
 	<table width="100%">
 	<input type="hidden" name="nick" value="null" />

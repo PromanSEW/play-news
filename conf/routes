@@ -3,14 +3,18 @@
 # ~~~~
 
 # Home page
-GET		/									controllers.Application.index()
-GET		/login  							controllers.Auth.login()
-GET		/register							controllers.Auth.signup()
-GET		/admin								controllers.Admin.admin()
-GET		/*path								controllers.Application.error(path: String)
-POST	/login								controllers.Auth.auth()
-POST	/logout								controllers.Auth.logout()
-POST	/register							controllers.Auth.register()
+GET		/				controllers.Application.index()
+GET		/login  		controllers.Auth.login()
+GET		/register		controllers.Auth.signup()
+GET		/news			controllers.Application.index()
+GET		/news/add		controllers.Admin.addNews()
+GET		/news/:id		controllers.Admin.openNews(id: Long)
+POST	/login			controllers.Auth.auth()
+POST	/logout			controllers.Auth.logout()
+POST	/register		controllers.Auth.register()
+POST	/news			controllers.Admin.add()
+POST	/news/:id		controllers.Admin.edit(id: String)
 
 # Map static resources from the /public folder to the /assets URL path
-GET		/assets/*file						controllers.Assets.at(path="/public", file)
+GET		/assets/*file	controllers.Assets.at(path="/public", file)
+GET		/*path			controllers.Application.error(path: String)

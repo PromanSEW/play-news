@@ -19,8 +19,6 @@ public class User extends Model {
 	private String nick;
 	
 	public User(Login l) { email = l.email; passwordHash = SHA256(l.password); nick = l.nick; }
-	
-	private User() { email = ""; passwordHash = ""; nick = ""; }
 
 	private static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 
@@ -33,7 +31,11 @@ public class User extends Model {
 	
 	public static String getNick(String email) {
 		if(email == null) return "";
-		else return find.byId(email).nick;
+		else {
+			User user = find.byId(email);
+			if(user != null) return user.nick;
+			else return "";
+		}
 	}
 
 	private static String SHA256(String str) {

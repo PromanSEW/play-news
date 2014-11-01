@@ -1,0 +1,16 @@
+@(newsobj: News, editable: Boolean)
+<table class="table table-bordered">
+	<tr>
+		<td><p class="help-block">@newsobj.topic</p></td>
+		<td width="15%" style="text-align: right"><p class="help-block">(@newsobj.date)</p></td>
+		<td width="20%" style="text-align: right"><p class="help-block">@newsobj.author</p></td>
+		@if(editable) {
+		<td width="48px">
+			<a href="@routes.Admin.openNews(newsobj.id)">
+				<img src="@routes.Assets.at("images/edit.png")" alt="Редактировать" />
+			</a>
+		</td>
+		}
+	</tr>
+	<tr><td colspan="3">@newsobj.content</td></tr>
+</table>

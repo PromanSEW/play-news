@@ -1,5 +1,5 @@
 @(regForm: Form[Login])
-@main("Регистрация") {
+@main("Регистрация", "") {
 	@helper.form(routes.Auth.register()) {
 	@input(regForm("sgroup"), "", "", 'type -> "hidden")
 	<table width="100%">
