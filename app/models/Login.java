@@ -20,9 +20,8 @@ public class Login extends Model {
 	@Required
 	public String nick;
 	
-	public Login() { email = ""; password = ""; nick = ""; }
-	
-	public User validateUser() {
+	// Валидация
+	public String validateUser() {
 		return User.authenticate(email, password);
 	}
 }

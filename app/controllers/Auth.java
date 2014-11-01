@@ -10,18 +10,18 @@ public class Auth extends Controller {
 	// Страница формы для аутентификации
     public static Result login() {
     	if(session("email") != null) return redirect(routes.Application.index());
-    	else return ok(login.render(Form.form(Login.class).fill(new Login()), ""));
+    	else return ok(login.render(Form.form(Login.class), ""));
     }
     
-    // Обработка формы аутентификации
+	// Обработка формы аутентификации
     public static Result auth() {
     	Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
     	if(loginForm.hasErrors()) return badRequest(login.render(loginForm, ""));
     	else {
-    		if(loginForm.get().validateUser() != null) {
+    		if(loginForm.get().validateUser() == null) {
     			session("email", loginForm.get().email);
     			return redirect(routes.Application.index());
-    		} else return badRequest(login.render(loginForm, "failed"));
+    		} else return badRequest(login.render(loginForm, "failed"));		
     	}
     }
     
@@ -34,7 +34,7 @@ public class Auth extends Controller {
     // Страница регистрации
     public static Result signup() {
     	if(session("email") != null) return redirect(routes.Application.index());
-    	else return ok(register.render(Form.form(Login.class).fill(new Login()), ""));
+    	else return ok(register.render(Form.form(Login.class), ""));
     }
     
     // Регистрация

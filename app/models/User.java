@@ -20,17 +20,21 @@ public class User extends Model {
 	
 	private String nick;
 	
+	// Конструктор юзера по форме логина
 	public User(Login l) { email = l.email; passwordHash = SHA256(l.password); nick = l.nick; }
 
 	private static Finder<String, User> find = new Finder<String, User>(String.class, User.class);
 
-	public static User authenticate(String email, String password) {
+	// Аутентификация (при успехе return null)
+	public static String authenticate(String email, String password) {
 		User user = find.byId(email);
 		if(user != null) {
-			if(SHA256(password).equals(user.passwordHash)) return user;
-		} return null;
+			if(SHA256(password).equals(user.passwordHash)) return null;
+			else return "failed";
+		} return "failed";
 	}
 	
+	// Существует ли пользователь (если нет return null)
 	public static String exists(Login l) {
 		if(find.byId(l.email) != null) return "email";
 		else {
@@ -39,6 +43,7 @@ public class User extends Model {
 		}
 	}
 	
+	// Получить ник по email в cookies
 	public static String getNick(String email) {
 		if(email == null) return "";
 		else {
@@ -48,6 +53,7 @@ public class User extends Model {
 		}
 	}
 
+	// Шифрование пароля через SHA-256 (return HEX string)
 	private static String SHA256(String str) {
 		try { MessageDigest digest = MessageDigest.getInstance("SHA-256");
 			digest.update(str.getBytes());
