@@ -14,11 +14,11 @@ public class User extends Model {
 
 	@Id
 	@Email
-	private String email;
+	private String email; // Email
 	
-	private String passwordHash;
+	private String passwordHash; // Хэш пароля (HEX String)
 	
-	private String nick;
+	private String nick; // Ник
 	
 	// Конструктор юзера по форме логина
 	public User(Login l) { email = l.email; passwordHash = SHA256(l.password); nick = l.nick; }
@@ -28,10 +28,8 @@ public class User extends Model {
 	// Аутентификация (при успехе return null)
 	public static String authenticate(String email, String password) {
 		User user = find.byId(email);
-		if(user != null) {
-			if(SHA256(password).equals(user.passwordHash)) return null;
-			else return "failed";
-		} return "failed";
+		if(user != null && SHA256(password).equals(user.passwordHash)) return null;
+		return "failed";
 	}
 	
 	// Существует ли пользователь (если нет return null)

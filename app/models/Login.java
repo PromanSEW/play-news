@@ -21,7 +21,5 @@ public class Login extends Model {
 	public String nick;
 	
 	// Валидация
-	public String validateUser() {
-		return User.authenticate(email, password);
-	}
+	public String validateUser() { return User.authenticate(email, password); }
 }

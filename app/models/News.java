@@ -15,13 +15,13 @@ public class News extends Model {
 	@Id
 	public Long id;
 	
-	public Date date;
+	public Date date; // Дата новости
 	
 	@Required
-	public String author; // Автор
+	public String author; // Автор (до 255 символов)
 	
 	@Required
-	public String topic; // Заголовок
+	public String topic; // Заголовок (до 255 символов)
 	
 	@Required
 	@Column(columnDefinition = "TEXT")
