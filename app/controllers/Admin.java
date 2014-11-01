@@ -9,6 +9,6 @@ import views.html.*;
 public class Admin extends Controller {
     
     public static Result admin() {
-    	return ok(admin.render(User.getUser(session().get("email"))));
+    	return ok(admin.render(User.getNick(session().get("email"))));
     }
 }

@@ -16,7 +16,7 @@ public class User extends Model {
 	@Email
 	private String email;
 	private String passwordHash;
-	public String nick;
+	private String nick;
 	
 	public User(Login l) { email = l.email; passwordHash = SHA256(l.password); nick = l.nick; }
 	
@@ -31,9 +31,9 @@ public class User extends Model {
 		} return null;
 	}
 	
-	public static User getUser(String email) {
-		if(email == null) return new User();
-		else return find.byId(email);
+	public static String getNick(String email) {
+		if(email == null) return "";
+		else return find.byId(email).nick;
 	}
 
 	private static String SHA256(String str) {

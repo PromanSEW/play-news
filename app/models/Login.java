@@ -22,7 +22,7 @@ public class Login extends Model {
 	
 	public Login() { email = ""; password = ""; nick = ""; }
 	
-	public User validate() {
+	public User validateUser() {
 		return User.authenticate(email, password);
 	}
 }
