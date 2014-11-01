@@ -19,13 +19,8 @@ public class Login extends Model {
 	
 	@Required
 	public String nick;
-	public String sgroup;
 	
-	public Login() { email = ""; password = ""; nick = ""; sgroup = "user"; }
-	
-	public Login(User user) {
-		email = user.getEmail(); password = ""; nick = user.nick; sgroup = user.getUserGroup().name;
-	}
+	public Login() { email = ""; password = ""; nick = ""; }
 	
 	public User validate() {
 		return User.authenticate(email, password);
