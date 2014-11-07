@@ -19,9 +19,7 @@
     <body>
     	<table class="table">
 			<tr>
-				<td>
-					<h3><a href="/">Мой сайт</a></h3>
-				</td>
+				<td><h3><a href="/">Мой сайт</a></h3></td>
 				<td width="70%">
 					@helper.form(if(user == "") {routes.Auth.login()} else {routes.Auth.logout()}, 'class -> "form-inline") {
 					<table width="100%">
